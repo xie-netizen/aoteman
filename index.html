@@ -12,6 +12,8 @@
             max-width: 900px;
             margin: 0 auto;
             overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
         }
 
         .main-title {
@@ -110,6 +112,32 @@
         .role-content.active {
             display: block;
         }
+        
+        @keyframes rainbowFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        
+        .glow-text {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            background: linear-gradient(
+                to right,
+                #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00
+            );
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbowFlow 8s linear infinite;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            z-index: 1000;
+            padding: 5px 10px;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
     </style>
 </head>
 <body>
@@ -160,6 +188,8 @@
         <div id="us" class="role-content"></div>
         <div id="l" class="role-content"></div>
     </div>
+    
+    <div class="glow-text">感谢3249的耄耋提供信息</div>
 
     <script>
         function toggleContent(id) {
