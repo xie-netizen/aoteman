@@ -138,6 +138,43 @@
             border-radius: 5px;
             box-sizing: border-box;
         }
+
+        /* 角色卡片美化样式 */
+        .faction-header {
+            margin: 24px 0 12px 0;
+        }
+
+        .char-card {
+            background: #2a2a2a;
+            margin: 12px 0;
+            padding: 16px;
+            border-radius: 12px;
+            border-left: 3px solid #00ccff;
+            transition: all 0.3s ease;
+        }
+
+        .char-card:hover {
+            background: #323232;
+            border-left-color: #ffcc00;
+            transform: translateX(4px);
+        }
+
+        .char-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #00ccff;
+            margin-bottom: 8px;
+        }
+
+        .char-desc {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #e0e0e0;
+        }
+
+        .char-desc p {
+            margin: 6px 0;
+        }
     </style>
 </head>
 <body>
@@ -179,12 +216,121 @@
 
     <div id="roles" class="guide">
         <div class="role-tabs">
-            <button class="tab-btn" onclick="showTab('ss', this)">SS</button>
+            <button class="tab-btn active" onclick="showTab('ss', this)">SS</button>
             <button class="tab-btn" onclick="showTab('us', this)">US</button>
             <button class="tab-btn" onclick="showTab('l', this)">L</button>
         </div>
 
-        <div id="ss" class="role-content active"></div>
+        <div id="ss" class="role-content active">
+            <div class="faction-header">
+                <h2 style="color:#ffcc00; border:none; text-align:center; margin:0 0 16px 0;">奥特之星</h2>
+            </div>
+
+            <div class="char-card">
+                <div class="char-name">1. 奥特之母</div>
+                <div class="char-desc">
+                    <p>回血形态：可回血，可提升全队格挡，可解除异常状态</p>
+                    <p>回能形态：全队回能+3，减少敌方前排格挡</p>
+                    <p><span class="hl">+11 死亡：提升全队免伤和能量</span></p>
+                </div>
+            </div>
+
+            <div class="char-card">
+                <div class="char-name">2. 泰罗（同归于尽）</div>
+                <div class="char-desc">
+                    <p>优秀的刷本机制，全体200%伤害，前排额外200%伤害</p>
+                    <p><span class="hl">+1：</span>提升前三次30%攻击伤害和大招伤+420</p>
+                    <p><span class="hl">+11 死亡：</span>解除全队异常</p>
+                </div>
+            </div>
+
+            <div class="faction-header">
+                <h2 style="color:#ffcc00; border:none; text-align:center; margin:24px 0 16px 0;">多宇宙</h2>
+            </div>
+
+            <div class="char-card">
+                <div class="char-name">1. 杰斯提斯（粉碎型）</div>
+                <div class="char-desc">
+                    <p>提升敌方前排受伤率，本命好凑，易获取</p>
+                    <p>后期还可突破</p>
+                    <p><span class="hl">+9 死亡：</span>提升全队免伤和能量</p>
+                </div>
+            </div>
+
+            <div class="char-card">
+                <div class="char-name">2. 银河奥特曼</div>
+                <div class="char-desc">
+                    <p>伤害不俗，提升后排三点能量，前中期万能打工人</p>
+                </div>
+            </div>
+
+            <div class="char-card">
+                <div class="char-name">3. 戴拿奥特曼</div>
+                <div class="char-desc">
+                    <p>伤害不俗，提升全队50%暴击率和30%暴击伤害，究极打工人</p>
+                </div>
+            </div>
+
+            <div class="char-card">
+                <div class="char-name">4. 钢铁九号（飞机形态）</div>
+                <div class="char-desc">
+                    <p>前排100%混乱，打本竞技场都兼容，控制形角色</p>
+                </div>
+            </div>
+
+            <div class="char-card">
+                <div class="char-name">5. 黑暗迪迦</div>
+                <div class="char-desc">
+                    <p>增伤免伤都有，全体伤害+中毒+减少命中</p>
+                    <p>缺点是专打血量少的队友，极易培养</p>
+                    <p><span class="hl">但只适合替补位</span></p>
+                </div>
+            </div>
+
+            <div class="char-card">
+                <div class="char-name">6. 艾克斯奥特曼（混合装甲）</div>
+                <div class="char-desc">
+                    <p>直线控制，减少格挡率</p>
+                </div>
+            </div>
+
+            <div class="faction-header">
+                <h2 style="color:#ffcc00; border:none; text-align:center; margin:24px 0 16px 0;">怪兽</h2>
+            </div>
+
+            <div class="char-card">
+                <div class="char-name">1. 黑色金古桥</div>
+                <div class="char-desc">
+                    <p>全体减能</p>
+                    <p><span class="hl">+5 攻击：</span>有16%使敌人混乱</p>
+                </div>
+            </div>
+
+            <div class="char-card">
+                <div class="char-name">2. 黑暗洛普斯</div>
+                <div class="char-desc">
+                    <p>全体伤害，全体减能，刷本过渡好用</p>
+                </div>
+            </div>
+
+            <div class="faction-header">
+                <h2 style="color:#ffcc00; border:none; text-align:center; margin:24px 0 16px 0;">宇宙人</h2>
+            </div>
+
+            <div class="char-card">
+                <div class="char-name">1. 嘎次星人（暗杀者）</div>
+                <div class="char-desc">
+                    <p>后排100%眩晕，稳定控制三人</p>
+                </div>
+            </div>
+
+            <div class="char-card">
+                <div class="char-name">2. 泰恩贝拉星人</div>
+                <div class="char-desc">
+                    <p>普攻减少前排闪避，大招提升敌方前排50%受伤率</p>
+                </div>
+            </div>
+        </div>
         <div id="us" class="role-content"></div>
         <div id="l" class="role-content"></div>
     </div>
