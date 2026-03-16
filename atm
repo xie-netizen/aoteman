@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+ <html>
+ <head>
+ <meta charset="UTF-8">
+ <title>奥特曼系列OL攻略</title>
+ <style>
+ body {
+     background:#121212;
+     color:#fff;
+     font-family:微软雅黑;
+     padding:20px;
+     max-width:900px;
+     margin:0 auto;
+ }
+ .main-title {
+     text-align:center;
+     font-size:32px;
+     color:#ffcc00;
+     margin-bottom:30px;
+     text-shadow:0 0 10px #ffcc00;
+ }
+ .btn {
+     display:block;
+     width:100%;
+     padding:18px;
+     font-size:20px;
+     font-weight:bold;
+     color:#fff;
+     background:linear-gradient(90deg,#ff4500,#ffcc00);
+     border:none;
+     border-radius:10px;
+     cursor:pointer;
+     text-align:center;
+     margin-bottom:20px;
+ }
+ .guide {
+     display:none;
+     background:#1e1e1e;
+     padding:25px;
+     border-radius:10px;
+     line-height:1.9;
+ }
+ h2 {
+     color:#00ccff;
+     border-left:4px solid #00ccff;
+     padding-left:10px;
+ }
+ .hl {
+     color:#ff6600;
+     font-weight:bold;
+ }
+ ul {
+     padding-left:20px;
+ }
+ li {
+     margin:8px 0;
+ }
+ </style>
+ </head>
+ <body>
+ <!-- 大标题 -->
+ <div class="main-title">奥特曼系列OL攻略</div>
+ <!-- 按钮 -->
+ <button class="btn" onclick="document.getElementById('guide').style.display = document.getElementById('guide').style.display=='block'?'none':'block'">
+ 新区胶囊红装攻略（宇宙级详细版）
+ </button>
+ <!-- 攻略内容 -->
+ <div id="guide" class="guide">
+     <p>在胶囊活动页面会有六个胶囊，研发开始会获得六个随机胶囊，可以花费光源重置刷新胶囊</p>
+     <p>重置刷取胶囊会有概率获得蓝色捷德胶囊（<span class="hl">重置不会刷新已经拥有的捷德胶囊，可以放心刷新</span>）</p>
+     <h2>① 积分获取规则</h2>
+     <p>要注意的是，<span class="hl">获取积分只有蓝色捷德胶囊可以获取，其他并无积分奖励</span></p>
+     <p>对应分值如下：</p>
+     <ul>
+         <li>6蓝胶囊=300分</li>
+         <li>5蓝胶囊=168分</li>
+         <li>4蓝胶囊=128分</li>
+         <li>3蓝胶囊=98分</li>
+         <li>2蓝胶囊=48分</li>
+         <li>1蓝胶囊=28分</li>
+     </ul>
+     <h2>② 累积积分奖励</h2>
+     <p>在胶囊研发活动中会有累积积分奖励，<span class="hl">每累积达到4000分，可以领取14个自选红装一代碎片奖励</span>，到达4000分后会刷新累积，重新开始累积4000的奖励</p>
+     <p>所以根据需求分为4000档 8000档 12000档</p>
+     <h2>③ 红装获取性价比分析</h2>
+     <p>一个一代红装自选箱碎片需要600积分</p>
+     <ul>
+         <li><strong>4000分档：</strong>4000/600≈6 → 6+14=20 → 两次活动一件红，<span class="hl">养老推荐</span></li>
+         <li><strong>8000分档：</strong>8000/600≈13 → 13+28=41 → 一次活动一件红，<span class="hl">平民最适合</span></li>
+         <li><strong>12000分档：</strong>12000/600=20 → 20+42=62 → 一次活动两件红，<span class="hl">富哥档位，不要上头</span></li>
+     </ul>
+ </div>
+ </body>
+ </html>
