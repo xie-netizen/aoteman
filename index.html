@@ -170,6 +170,47 @@
         .char-desc p {
             margin: 6px 0;
         }
+        
+        /* 小鸟按钮样式 */
+        .bird-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+        
+        .bird-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+        }
+        
+        /* 小鸟表情样式 */
+        .bird-emoji {
+            position: fixed;
+            font-size: 30px;
+            pointer-events: none;
+            animation: birdBounce 1s ease-out forwards;
+            z-index: 998;
+        }
+        
+        @keyframes birdBounce {
+            0% { transform: translate(0, 0); opacity: 1; }
+            50% { transform: translate(-20px, -50px); }
+            100% { transform: translate(20px, -100px); opacity: 0; }
+        }
     </style>
 </head>
 <body>
@@ -225,7 +266,7 @@
                 <div class="char-name">1. 奥特之母</div>
                 <div class="char-desc">
                     <p>回血形态：可回血，可提升全队格挡，可解除异常状态</p>
-                    <p>回能形态：全队回能+3，减少敌方前排格挡</p>
+                    <p>回能形态：全队回能+2，减少敌方前排格挡</p>
                     <p><span class="hl">+11 死亡：提升全队免伤和能量</span></p>
                 </div>
             </div>
@@ -321,7 +362,7 @@
         <div id="l" class="role-content"></div>
     </div>
 
-    <!-- 新增：感谢栏按钮 -->
+    <!-- 感谢栏按钮 -->
     <button class="btn" onclick="toggleContent('thanks')">
         感谢栏
     </button>
@@ -329,7 +370,11 @@
     <div id="thanks" class="guide">
         <div class="rainbow-text">3303区锥生启太</div>
         <div class="rainbow-text">3249的耄耋</div>
+		<div class="rainbow-text">红渡</div>
     </div>
+
+    <!-- 小鸟按钮 -->
+    <button class="bird-btn" onclick="showBirdEmoji()">🐦</button>
 
     <script>
         function toggleContent(id) {
@@ -350,6 +395,27 @@
 
             document.getElementById(tabId).classList.add('active');
             btn.classList.add('active');
+        }
+        
+        // 小鸟表情弹出功能（修复版）
+        function showBirdEmoji() {
+            const bird = document.createElement('div');
+            bird.className = 'bird-emoji';
+            bird.textContent = '🐦';
+            
+            // 随机位置
+            const x = Math.random() * (window.innerWidth - 50);
+            const y = Math.random() * (window.innerHeight - 50);
+            
+            bird.style.left = x + 'px';
+            bird.style.top = y + 'px';
+            
+            document.body.appendChild(bird);
+            
+            // 1秒后自动删除
+            setTimeout(() => {
+                bird.remove();
+            }, 1000);
         }
     </script>
 </body>
