@@ -211,9 +211,142 @@
             50% { transform: translate(-20px, -50px); }
             100% { transform: translate(20px, -100px); opacity: 0; }
         }
+
+        /* 反馈按钮（左下角） */
+        .feedback-btn {
+            position: fixed;
+            bottom: 15px;
+            left: 15px;
+            padding: 8px 16px;
+            background: #00ccff;
+            color: #000;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        /* 反馈弹窗 */
+        .feedback-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #222;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            z-index: 1001;
+            display: none;
+            min-width: 280px;
+        }
+
+        .feedback-modal p {
+            margin: 8px 0;
+            font-size: 16px;
+        }
+
+        .feedback-modal .modal-btn {
+            margin: 12px 6px 0;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .close-btn {
+            background: #666;
+            color: #fff;
+        }
+
+        .destroy-btn {
+            background: #ff4444;
+            color: #fff;
+        }
+
+        /* 炸弹爆炸碎片 */
+        .shard {
+            position: absolute;
+            background: #2a2a2a;
+            pointer-events: none;
+            animation: bombFly 1s ease-out forwards;
+            z-index: 99;
+        }
+
+        @keyframes bombFly {
+            0% { transform: translate(0,0) scale(1) rotate(0); opacity: 1; }
+            100% { transform: translate(calc(var(--tx)*1px), calc(var(--ty)*1px)) scale(0.5) rotate(calc(var(--rot)*1deg)); opacity: 0; }
+        }
+
+        /* 爆炸闪光 */
+        .flash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 9999;
+            animation: flash 0.2s ease;
+        }
+
+        @keyframes flash {
+            0% { opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { opacity: 0; }
+        }
+
+        /* 黑屏遮罩 */
+        .black-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 9998;
+            display: none;
+        }
+
+        /* 大鸟动画（半屏大，从右往左飞出屏幕） */
+        .big-bird {
+            position: fixed;
+            top: 50%;
+            right: -50vw;
+            transform: translateY(-50%);
+            font-size: 50vw;
+            z-index: 9999;
+            animation: bigBirdFly 3.5s linear forwards;
+            display: none;
+        }
+
+        @keyframes bigBirdFly {
+            0% { right: -50vw; }
+            100% { right: 150vw; }
+        }
     </style>
 </head>
 <body>
+    <!-- 左下角反馈按钮 -->
+    <button class="feedback-btn" onclick="showFeedback()">反馈</button>
+
+    <!-- 反馈弹窗 -->
+    <div class="feedback-modal" id="feedbackModal">
+        <p>制作人: 夕思瑶</p>
+        <p>Q群: 1090546296</p>
+        <button class="modal-btn close-btn" onclick="closeFeedback()">关闭</button>
+        <button class="modal-btn destroy-btn" onclick="bombExplode()">💣 炸弹爆炸</button>
+    </div>
+
+    <!-- 黑屏 -->
+    <div class="black-screen" id="blackScreen"></div>
+
+    <!-- 大鸟 -->
+    <div class="big-bird" id="bigBird">🐦</div>
+
     <div class="main-title">奥特曼系列OL攻略</div>
 
     <button class="btn" onclick="toggleContent('guide')">
@@ -416,6 +549,79 @@
             setTimeout(() => {
                 bird.remove();
             }, 1000);
+        }
+
+        // 反馈弹窗
+        function showFeedback() {
+            document.getElementById('feedbackModal').style.display = 'block';
+        }
+
+        function closeFeedback() {
+            document.getElementById('feedbackModal').style.display = 'none';
+        }
+
+        // 炸弹爆炸 → 黑屏5秒 → 大鸟从右往左飞出
+        function bombExplode() {
+            closeFeedback();
+            const targets = document.querySelectorAll('.btn, .guide, .char-card, .role-tabs, .tab-btn, .main-title, .faction-header h2');
+            const blackScreen = document.getElementById('blackScreen');
+            const bigBird = document.getElementById('bigBird');
+
+            // 闪光
+            const flash = document.createElement('div');
+            flash.className = 'flash';
+            document.body.appendChild(flash);
+            setTimeout(() => flash.remove(), 300);
+
+            // 方块消失
+            targets.forEach(el => {
+                el.style.transition = 'opacity 1s ease';
+                el.style.opacity = '0';
+            });
+
+            // 碎片炸飞
+            targets.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                const count = 40;
+                for (let i=0; i<count; i++) {
+                    const shard = document.createElement('div');
+                    shard.className = 'shard';
+                    shard.style.width = Math.random()*12+6 + 'px';
+                    shard.style.height = Math.random()*12+6 + 'px';
+                    shard.style.left = rect.left + Math.random()*rect.width + 'px';
+                    shard.style.top = rect.top + Math.random()*rect.height + 'px';
+                    
+                    const tx = (Math.random()-0.5)*600;
+                    const ty = (Math.random()-0.5)*600;
+                    const rot = (Math.random()-0.5)*1000;
+                    
+                    shard.style.setProperty('--tx', tx);
+                    shard.style.setProperty('--ty', ty);
+                    shard.style.setProperty('--rot', rot);
+                    
+                    document.body.appendChild(shard);
+                    setTimeout(() => shard.remove(), 1000);
+                }
+            });
+
+            // 黑屏 5 秒 → 大鸟飞出
+            setTimeout(() => {
+                blackScreen.style.display = 'block';
+                setTimeout(() => {
+                    bigBird.style.display = 'block';
+                    setTimeout(() => {
+                        blackScreen.style.display = 'none';
+                        bigBird.style.display = 'none';
+                    }, 3500);
+                }, 5000);
+            }, 1000);
+
+            // 10秒后恢复页面
+            setTimeout(() => {
+                targets.forEach(el => {
+                    el.style.opacity = '1';
+                });
+            }, 10000);
         }
     </script>
 </body>
